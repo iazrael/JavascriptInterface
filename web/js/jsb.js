@@ -53,7 +53,7 @@
 			var callback = null;
 			if(callback = mJavaCallbackMap[cmd.serial]){
 				mJavaCallbackMap[cmd.serial] = null;
-				callback(cmd.result, cmd.name);
+				callback(cmd.result);
 			}
 		}else if(cmd.type === EXECUTE_JAVASCRIPT_FUNCTION){
 		//java调用js

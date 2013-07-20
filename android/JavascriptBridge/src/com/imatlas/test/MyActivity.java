@@ -3,6 +3,7 @@ package com.imatlas.test;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -10,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.Toast;
 import com.imatlas.jsb.JavascriptBridge;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MyActivity extends Activity {
@@ -58,15 +60,22 @@ public class MyActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-//				Bundle params = new Bundle();
-//				params.putString("asdfasdf", "123123");
-//				//调用js提供的alert方法
-//				jsb.require("alert", params, new JavascriptBridge.Callback() {
-//					@Override
-//					public void onComplate(JSONObject response, String cmd, Bundle params) {
-//						Log.i("jsb",response.toString());
-//					}
-//				});
+				JSONObject params = new JSONObject();
+				try {
+					params.put("asdfasdf", "123123");
+					//调用js提供的alert方法
+					jsb.executeJavascript("alert", params, new JavascriptBridge.Callback() {
+						@Override
+						public void onComplate(JavascriptBridge.Command command, JSONObject response) {
+							//TODO
+							Toast.makeText(getApplicationContext(), "调用js的回调: " + response.toString(), Toast.LENGTH_LONG)
+									.show();
+						}
+					});
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
 
 			}
 		});
