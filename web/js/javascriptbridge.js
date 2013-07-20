@@ -57,6 +57,7 @@
 			}
 		}else if(cmd.type === EXECUTE_JAVASCRIPT_FUNCTION){
 		//java调用js
+		//TODO
 		}
 	}
 

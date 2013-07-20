@@ -32,6 +32,8 @@
     <file path="/sample.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374282461966" ignored="false" />
     <file path="/jsb.js" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374325927113" ignored="false" />
     <file path="/fragment.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374286544787" ignored="false" />
+    <file path="/test.html" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374326511598" ignored="false" />
+    <file path="/javascriptbridge.js" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374326545264" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,10 +115,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="jsb.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../../web/js/jsb.js">
+      <file leaf-file-name="javascriptbridge.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../web/js/javascriptbridge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="35" selection-start="1262" selection-end="1262" vertical-scroll-proportion="1.3561643">
+            <state line="59" column="14" selection-start="1345" selection-end="1345" vertical-scroll-proportion="0.7287671">
               <folding />
             </state>
           </provider>
@@ -150,6 +152,8 @@
         <option value="$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java" />
         <option value="$PROJECT_DIR$/../../web/js/test.js" />
         <option value="$PROJECT_DIR$/../../web/js/jsb.js" />
+        <option value="$PROJECT_DIR$/../../web/test.html" />
+        <option value="$PROJECT_DIR$/../../web/js/javascriptbridge.js" />
       </list>
     </option>
   </component>
@@ -712,11 +716,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../web/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="22" selection-end="22" vertical-scroll-proportion="0.025604552" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="43" selection-start="390" selection-end="390" vertical-scroll-proportion="0.26304802">
@@ -744,6 +743,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../../web/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="55" selection-start="207" selection-end="207" vertical-scroll-proportion="0.20483641">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../../web/js/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="52" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
@@ -751,9 +757,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../web/js/jsb.js">
+    <entry file="file://$PROJECT_DIR$/../../web/js/javascriptbridge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="35" selection-start="1262" selection-end="1262" vertical-scroll-proportion="1.3561643">
+        <state line="59" column="14" selection-start="1345" selection-end="1345" vertical-scroll-proportion="0.7287671">
           <folding />
         </state>
       </provider>
