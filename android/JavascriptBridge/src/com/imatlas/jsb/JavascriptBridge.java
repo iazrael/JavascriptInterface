@@ -71,13 +71,13 @@ public class JavascriptBridge {
 						executeJavaFunction(command);
 						return true;
 					case EXECUTE_JAVA_CALLBACK:
+						command = (Command) message.obj;
+						executeJavaCallback(command);
+						return true;
+					case EXECUTE_JAVASCRIPT_CALLBACK:
 					case EXECUTE_JAVASCRIPT_FUNCTION:
 						command = (Command) message.obj;
-						try {
-							executeJavascriptFunction(command);
-						} catch (JSONException e) {
-							e.printStackTrace();
-						}
+						executeJavascriptFunction(command);
 						return true;
 				}
 				return false;
@@ -115,8 +115,7 @@ public class JavascriptBridge {
 	 * @param callback
 	 */
 	public void executeJavascript(String cmdName, JSONObject params, Callback callback) {
-		Command command = new Command(cmdName, params, callback);
-		command.type = EXECUTE_JAVASCRIPT_FUNCTION;
+		Command command = new Command(cmdName, params, EXECUTE_JAVASCRIPT_FUNCTION);
 		if (callback != null) {
 			mJavascriptCallbackMap.put(command.serial, callback);
 		}
@@ -158,11 +157,19 @@ public class JavascriptBridge {
 	}
 
 	/**
+	 * 执行java对js的调用的回调
+	 * @param command
+	 */
+	private void executeJavaCallback(Command command) {
+		Callback callback = mJavascriptCallbackMap.get(command.serial);
+	}
+
+	/**
 	 * 执行command对应的javascript方法(被java调用)
 	 * @param command
 	 * @throws JSONException
 	 */
-	private void executeJavascriptFunction(Command command) throws JSONException {
+	private void executeJavascriptFunction(Command command) {
 		String cmdString = command.toString();
 		mWebView.loadUrl("javascript:" + VALUE_JAVASCRIPT_FUNCTION_NAME + "(" + cmdString + ")");
 	}
@@ -225,27 +232,22 @@ public class JavascriptBridge {
 		String serial;
 		String name;
 		JSONObject params;
-		Callback callback;
 		int type;
 		JSONObject result;
 
-		public Command(String serial, String name, JSONObject params) {
-			this.serial = serial;
-			this.name = name;
-			this.params = params;
+		public Command(JSONObject cmdObj) {
+			this.serial = cmdObj.optString(PARAM_SERIAL);
+			this.name = cmdObj.optString(PARAM_NAME);
+			this.params = cmdObj.optJSONObject(PARAM_PARAMS);
+			this.result = cmdObj.optJSONObject(PARAM_RESULT);
+			this.type = cmdObj.optInt(PARAM_TYPE);
 		}
 
-		public Command(JSONObject cmdObj) throws JSONException {
-			this(cmdObj.getString(PARAM_SERIAL), cmdObj.getString(PARAM_NAME),
-					cmdObj.getJSONObject(PARAM_PARAMS));
-
-		}
-
-		public Command(String name, JSONObject params, Callback callback) {
+		public Command(String name, JSONObject params, int type) {
 			this.serial = createSerial();
 			this.name = name;
 			this.params = params;
-			this.callback = callback;
+			this.type = type;
 		}
 
 		public String getName() {
@@ -281,7 +283,8 @@ public class JavascriptBridge {
 			this.serial = null;
 			this.name = null;
 			this.params = null;
-			this.callback = null;
+			this.result = null;
+			this.type = 0;
 		}
 
 
@@ -292,8 +295,8 @@ public class JavascriptBridge {
 		 */
 		public void setResult(JSONObject result) {
 			this.result = result;
-			this.type = EXECUTE_JAVA_CALLBACK;
-			Message message = mHandler.obtainMessage(EXECUTE_JAVA_CALLBACK, this);
+			this.type = EXECUTE_JAVASCRIPT_CALLBACK;
+			Message message = mHandler.obtainMessage(EXECUTE_JAVASCRIPT_CALLBACK, this);
 			mHandler.dispatchMessage(message);
 		}
 
@@ -326,7 +329,9 @@ public class JavascriptBridge {
 		 */
 		public void setResult(String cmdString) throws JSONException {
 			JSONObject cmdObj = new JSONObject(cmdString);
-			//TODO
+			Command command = new Command(cmdObj);
+			Message message = mHandler.obtainMessage(EXECUTE_JAVA_CALLBACK, command);
+			mHandler.dispatchMessage(message);
 		}
 
 

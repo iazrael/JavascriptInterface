@@ -37,6 +37,11 @@
 		return VALUE_SERIAL_PREFIX + ++serial;
 	}
 
+	var setResult = function(result){
+		var cmd = this;
+		api.setResult(cmd);
+	}
+
 	/**
 	 * 添加提供给java调用的js方法
 	 * @param {[type]} method [description]
@@ -57,7 +62,12 @@
 			}
 		}else if(cmd.type === EXECUTE_JAVASCRIPT_FUNCTION){
 		//java调用js
-		//TODO
+			var method = null;
+			if(method = mJsMethodMap[cmd.name]){
+				//绑定设置回调结果的方法到cmd对象
+				cmd.setResult = setResult;
+				method(cmd);
+			}
 		}
 	}
 
