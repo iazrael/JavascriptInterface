@@ -6,7 +6,7 @@
 (function(){
 	var NAMESPACE = 'jsb'
 	var API_NAMESPACE = '__JavascriptBridge__';
-	var API_CALLBACK_NAME = NAMESPACE + '.' + '__java_callback';
+	var API_CALLBACK_NAME =  '__java_callback';
 	var VALUE_SERIAL_PREFIX = 'js_'
 
 	var EXECUTE_JAVA_FUNCTION = 1;
@@ -39,7 +39,8 @@
 
 	var setResult = function(result){
 		var cmd = this;
-		api.setResult(cmd);
+		cmd.result = result;
+		api.setResult(JSON.stringify(cmd));
 	}
 
 	/**
@@ -51,14 +52,13 @@
 		mJsMethodMap[method] = func;
 	}
 
-	context[API_CALLBACK_NAME] = function(cmdString){
-		var cmd = JSON.parse(cmdString);
-		if(cmd.type === EXECUTE_JAVA_CALLBACK){
+	context[API_CALLBACK_NAME] = function(cmd){
+		if(cmd.type === EXECUTE_JAVASCRIPT_CALLBACK){
 		//执行java之后的回调
 			var callback = null;
 			if(callback = mJavaCallbackMap[cmd.serial]){
 				mJavaCallbackMap[cmd.serial] = null;
-				callback(cmd.result);
+				callback(cmd, cmd.result);
 			}
 		}else if(cmd.type === EXECUTE_JAVASCRIPT_FUNCTION){
 		//java调用js
@@ -82,11 +82,11 @@
 		params = params || {};
 		var cmd = {
 			serial: createSerial(),
-			cmdName: cmdName,
+			name: cmdName,
 			params: params
 		}
 		if(typeof callback === 'function'){
-			mJavaCallbackMap[serial] = callback;
+			mJavaCallbackMap[cmd.serial] = callback;
 		}
 		var cmdString = JSON.stringify(cmd);
 		api.execute(cmdString);

@@ -42,8 +42,17 @@ public class MyActivity extends Activity {
 			@Override
 			public void onExecute(JavascriptBridge.Command command) {
 				JSONObject params = command.getParams();
-				Toast.makeText(getApplicationContext(), params.toString(), Toast.LENGTH_LONG)
+				Toast.makeText(getApplicationContext(), "这是js调用, 参数是: " + params.toString(), Toast.LENGTH_LONG)
 						.show();
+
+				try {
+					JSONObject result = new JSONObject();
+					result.put("retcode", 1);
+					result.put("message", "messagebox callback");
+					command.setResult(result);
+				} catch (Exception e) {
+					e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+				}
 			}
 		});
 
@@ -67,9 +76,9 @@ public class MyActivity extends Activity {
 					jsb.executeJavascript("alert", params, new JavascriptBridge.Callback() {
 						@Override
 						public void onComplate(JavascriptBridge.Command command, JSONObject response) {
-							//TODO
 							Toast.makeText(getApplicationContext(), "调用js的回调: " + response.toString(), Toast.LENGTH_LONG)
 									.show();
+
 						}
 					});
 				} catch (JSONException e) {

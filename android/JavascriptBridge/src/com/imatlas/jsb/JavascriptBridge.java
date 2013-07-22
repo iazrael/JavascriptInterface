@@ -162,6 +162,7 @@ public class JavascriptBridge {
 	 */
 	private void executeJavaCallback(Command command) {
 		Callback callback = mJavascriptCallbackMap.get(command.serial);
+		callback.onComplate(command, command.result);
 	}
 
 	/**
@@ -189,10 +190,10 @@ public class JavascriptBridge {
 		/**
 		 * js方法执行后会调用该方法回调
 		 *
-		 * @param response
+		 * @param result
 		 * @param command
 		 */
-		public void onComplate(Command command, JSONObject response);
+		public void onComplate(Command command, JSONObject result);
 	}
 
 	/**
@@ -258,6 +259,10 @@ public class JavascriptBridge {
 			return params;
 		}
 
+		public JSONObject getResult(){
+			return result;
+		}
+
 		/**
 		 * 把命令的内容序列化成json字符串
 		 */
@@ -317,6 +322,7 @@ public class JavascriptBridge {
 		public void execute(String cmdString) throws JSONException {
 			JSONObject cmdObj = new JSONObject(cmdString);
 			Command command = new Command(cmdObj);
+			command.type = EXECUTE_JAVA_FUNCTION;
 			Message message = mHandler.obtainMessage(EXECUTE_JAVA_FUNCTION, command);
 			mHandler.dispatchMessage(message);
 		}
@@ -330,6 +336,7 @@ public class JavascriptBridge {
 		public void setResult(String cmdString) throws JSONException {
 			JSONObject cmdObj = new JSONObject(cmdString);
 			Command command = new Command(cmdObj);
+			command.type = EXECUTE_JAVA_CALLBACK;
 			Message message = mHandler.obtainMessage(EXECUTE_JAVA_CALLBACK, command);
 			mHandler.dispatchMessage(message);
 		}
