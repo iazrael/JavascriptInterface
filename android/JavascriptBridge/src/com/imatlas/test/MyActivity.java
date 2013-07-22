@@ -55,7 +55,15 @@ public class MyActivity extends Activity {
 				}
 			}
 		});
-
+		jsb.setOnExecuteCommandListener(new JavascriptBridge.OnExecuteCommandListener() {
+			@Override
+			public boolean shouldExecuteCommand(String domain, JavascriptBridge.Command command) {
+				if(domain.equals("www.imatlas.com")){
+					return true;
+				}
+				return false;
+			}
+		});
 		webView.loadUrl("http://www.imatlas.com/test.html");
 		btn.setOnClickListener(new View.OnClickListener() {
 

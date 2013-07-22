@@ -24,7 +24,7 @@
     <ignored path=".idea/workspace.xml" />
     <file path="$PROJECT_DIR$/res/values/strings.xml" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374251561681" ignored="false" />
     <file path="$PROJECT_DIR$/gen/com/imatlas/test/R.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374251678286" ignored="false" />
-    <file path="/MyActivity.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374459881331" ignored="false" />
+    <file path="/MyActivity.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374482262791" ignored="false" />
     <file path="/JavascriptBridge.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374460564121" ignored="false" />
     <file path="/JSONUtil.java" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374252034924" ignored="false" />
     <file path="/a.dummy" changelist="bc087329-d47b-4d8f-80ea-5469d12486ef" time="1374284051168" ignored="false" />
@@ -50,7 +50,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -87,7 +86,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/src/com/imatlas/jsb/JavascriptBridge.java" line="146" class="com.imatlas.jsb.JavascriptBridge" package="com.imatlas.jsb">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
@@ -134,6 +133,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -143,13 +143,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MyActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="MyActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="100" selection-start="2401" selection-end="2409" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#2539#2540#0" expanded="true" />
-              </folding>
+            <state line="88" column="0" selection-start="2813" selection-end="2813" vertical-scroll-proportion="1.8386167">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -157,16 +155,16 @@
       <file leaf-file-name="test.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../web/js/test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="89" selection-start="364" selection-end="372" vertical-scroll-proportion="0.0">
+            <state line="8" column="50" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="javascriptbridge.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="javascriptbridge.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../../web/js/javascriptbridge.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="30" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.44494382">
+            <state line="50" column="56" selection-start="1002" selection-end="1046" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -175,7 +173,7 @@
       <file leaf-file-name="JavascriptBridge.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/imatlas/jsb/JavascriptBridge.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="192" column="24" selection-start="4698" selection-end="4698" vertical-scroll-proportion="0.0">
+            <state line="21" column="35" selection-start="361" selection-end="385" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -196,16 +194,16 @@
         <option value="$PROJECT_DIR$/../../web/js/jsb.js" />
         <option value="$PROJECT_DIR$/../../web/test.html" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java" />
         <option value="$PROJECT_DIR$/src/com/imatlas/jsb/JavascriptBridge.java" />
         <option value="$PROJECT_DIR$/../../web/js/test.js" />
         <option value="$PROJECT_DIR$/../../web/js/javascriptbridge.js" />
+        <option value="$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-60" />
-    <option name="y" value="25" />
+    <option name="x" value="95" />
+    <option name="y" value="18" />
     <option name="width" value="1436" />
     <option name="height" value="878" />
   </component>
@@ -267,7 +265,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -370,6 +367,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -575,32 +573,32 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-60" y="25" width="1436" height="878" extended-state="0" />
-    <editor active="false" />
+    <frame x="95" y="18" width="1436" height="878" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3992095" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22780204" sideWeight="0.65464634" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24235807" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23498498" sideWeight="0.65464634" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34535366" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964029" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24964029" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -678,19 +676,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/util/JSONUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#bundleToJSON#0;class#JSONUtil#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="35" column="13" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#2539#2540#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -703,19 +695,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/util/JSONUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="13" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#bundleToJSON#0;class#JSONUtil#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="35" column="13" selection-start="956" selection-end="956" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="49" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#2539#2540#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -728,18 +714,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/util/JSONUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="77" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="method#bundleToJSON#0;class#JSONUtil#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="24" column="77" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="31" selection-start="1307" selection-end="1307" vertical-scroll-proportion="-23.333334">
-          <folding />
-        </state>
+        <state line="35" column="31" selection-start="1307" selection-end="1307" vertical-scroll-proportion="-23.333334" />
       </provider>
       <provider editor-type-id="android-designer">
         <state />
@@ -752,9 +732,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/JavascriptBridge.iml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="14" selection-start="288" selection-end="288" vertical-scroll-proportion="0.36438924">
-          <folding />
-        </state>
+        <state line="8" column="14" selection-start="288" selection-end="288" vertical-scroll-proportion="0.36438924" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
@@ -766,30 +744,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/imatlas/jsb/JavascriptBridge.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="192" column="24" selection-start="4698" selection-end="4698" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="100" selection-start="2401" selection-end="2409" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#2539#2540#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../web/js/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="89" selection-start="364" selection-end="372" vertical-scroll-proportion="0.0">
+        <state line="21" column="35" selection-start="361" selection-end="385" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../../web/js/javascriptbridge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="30" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.44494382">
+        <state line="50" column="56" selection-start="1002" selection-end="1046" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../web/js/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="50" selection-start="333" selection-end="333" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/imatlas/test/MyActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="0" selection-start="2813" selection-end="2813" vertical-scroll-proportion="1.8386167">
           <folding />
         </state>
       </provider>
