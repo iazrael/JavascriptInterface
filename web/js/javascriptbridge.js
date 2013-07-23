@@ -48,7 +48,7 @@
 	 * @param {[type]} method [description]
 	 * @param {[type]} func   [description]
 	 */
-	context.addJavascriptMethod = function(method, func){
+	context.addMethod = function(method, func){
 		mJsMethodMap[method] = func;
 	}
 
@@ -78,7 +78,7 @@
 	 * @param  {Function} callback [description]
 	 * @return {[type]}
 	 */
-	context.executeJava = function(cmdName, params, callback){
+	context.execute = function(cmdName, params, callback){
 		params = params || {};
 		var cmd = {
 			serial: createSerial(),

@@ -3,7 +3,6 @@ package com.imatlas.test;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -37,7 +36,7 @@ public class MyActivity extends Activity {
 		final JavascriptBridge jsb = new JavascriptBridge(webView);
 
 		//添加个 messagebox 方法给js
-		jsb.addJavaMethod("messagebox", new JavascriptBridge.Function() {
+		jsb.registerCommand("messagebox", new JavascriptBridge.Function() {
 
 			@Override
 			public void onExecute(JavascriptBridge.Command command) {
@@ -81,9 +80,9 @@ public class MyActivity extends Activity {
 				try {
 					params.put("asdfasdf", "123123");
 					//调用js提供的alert方法
-					jsb.executeJavascript("alert", params, new JavascriptBridge.Callback() {
+					jsb.execute("alert", params, new JavascriptBridge.Callback() {
 						@Override
-						public void onComplate(JavascriptBridge.Command command, JSONObject response) {
+						public void onComplete(JavascriptBridge.Command command, JSONObject response) {
 							Toast.makeText(getApplicationContext(), "调用js的回调: " + response.toString(), Toast.LENGTH_LONG)
 									.show();
 

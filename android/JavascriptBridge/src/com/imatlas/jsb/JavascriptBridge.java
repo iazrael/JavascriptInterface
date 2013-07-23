@@ -91,11 +91,11 @@ public class JavascriptBridge {
 	/**
 	 * 添加一个java方法给js调用
 	 *
-	 * @param method
+	 * @param cmdName
 	 * @param function
 	 */
-	public void addJavaMethod(String method, Function function) {
-		mJavaMethodMap.put(method, function);
+	public void registerCommand(String cmdName, Function function) {
+		mJavaMethodMap.put(cmdName, function);
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class JavascriptBridge {
 	 * @param params
 	 * @param callback
 	 */
-	public void executeJavascript(String cmdName, JSONObject params, Callback callback) {
+	public void execute(String cmdName, JSONObject params, Callback callback) {
 		Command command = new Command(cmdName, params, EXECUTE_JAVASCRIPT_FUNCTION);
 		if (callback != null) {
 			mJavascriptCallbackMap.put(command.serial, callback);
@@ -162,7 +162,7 @@ public class JavascriptBridge {
 	 */
 	private void executeJavaCallback(Command command) {
 		Callback callback = mJavascriptCallbackMap.get(command.serial);
-		callback.onComplate(command, command.result);
+		callback.onComplete(command, command.result);
 	}
 
 	/**
@@ -193,7 +193,7 @@ public class JavascriptBridge {
 		 * @param result
 		 * @param command
 		 */
-		public void onComplate(Command command, JSONObject result);
+		public void onComplete(Command command, JSONObject result);
 	}
 
 	/**
