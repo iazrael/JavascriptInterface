@@ -55,8 +55,8 @@ public class JavascriptBridge {
 
 	private OnExecuteCommandListener mOnExecuteCommandListener;
 
-	public JavascriptBridge(WebView mWebView) {
-		this.mWebView = mWebView;
+	public JavascriptBridge(WebView webView) {
+		this.mWebView = webView;
 
 		mJavaMethodMap = new HashMap<String, Function>();
 		mJavascriptCallbackMap = new HashMap<String, Callback>();
@@ -84,7 +84,7 @@ public class JavascriptBridge {
 			}
 		});
 
-		mWebView.addJavascriptInterface(new JavascriptInterface(), API_NAMESPACE);
+		this.mWebView.addJavascriptInterface(new JavascriptInterface(), API_NAMESPACE);
 
 	}
 

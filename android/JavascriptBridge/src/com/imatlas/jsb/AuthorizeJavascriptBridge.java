@@ -30,8 +30,8 @@ public class AuthorizeJavascriptBridge extends JavascriptBridge {
 		}
 	};
 
-	public AuthorizeJavascriptBridge(WebView mWebView, String configString) throws JSONException {
-		super(mWebView);
+	public AuthorizeJavascriptBridge(WebView webView, String configString) throws JSONException {
+		super(webView);
 		this.setOnExecuteCommandListener(listener);
 		this.setConfig(configString);
 	}
