@@ -48,8 +48,8 @@
 	 * @param {[type]} method [description]
 	 * @param {[type]} func   [description]
 	 */
-	context.addMethod = function(method, func){
-		mJsMethodMap[method] = func;
+	context.registerCommand = function(cmdName, func){
+		mJsMethodMap[cmdName] = func;
 	}
 
 	context[API_CALLBACK_NAME] = function(cmd){

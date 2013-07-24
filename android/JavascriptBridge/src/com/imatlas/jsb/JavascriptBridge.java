@@ -60,7 +60,7 @@ public class JavascriptBridge {
 
 		mJavaMethodMap = new HashMap<String, Function>();
 		mJavascriptCallbackMap = new HashMap<String, Callback>();
-
+		//使用handler来确保webview相关的接口是在ui线程调用的
 		mHandler = new Handler(new Handler.Callback() {
 			@Override
 			public boolean handleMessage(Message message) {
@@ -134,6 +134,9 @@ public class JavascriptBridge {
 			return null;
 		}
 		Uri uri = Uri.parse(url);
+		if (uri == null) {
+			return null;
+		}
 		String host = uri.getHost();
 		return host;
 	}
@@ -144,6 +147,9 @@ public class JavascriptBridge {
 	 */
 	private void executeJavaFunction(Command command) {
 		String domain = getCurrentDomain();
+		if (domain == null) {//什么? 当前页面竟然没url!!
+			return;
+		}
 		if (mOnExecuteCommandListener != null) {
 			boolean shouldExec = mOnExecuteCommandListener.shouldExecuteCommand(domain, command);
 			if (!shouldExec) {
@@ -153,6 +159,8 @@ public class JavascriptBridge {
 		Function function = mJavaMethodMap.get(command.name);
 		if (function != null) {
 			function.onExecute(command);
+		}else if (mOnExecuteCommandListener != null) {
+			mOnExecuteCommandListener.onCommandNotFound(command);
 		}
 	}
 
@@ -222,6 +230,12 @@ public class JavascriptBridge {
 		 * @return 返回 true 将拒绝执行该命令, 返回 false 则允许其执行
 		 */
 		public boolean shouldExecuteCommand(String domain, Command command);
+
+		/**
+		 * 当一个命令被调用时, 找不到命令对应的java方法时, 执行该方法
+		 * @param command
+		 */
+		public void onCommandNotFound(Command command);
 	}
 
 	/**

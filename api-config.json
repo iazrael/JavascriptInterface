@@ -1,0 +1,23 @@
+{
+	"rights": {
+		"mq.close": 2,
+		"mq.net.getJson": 1,
+		"mq.getLocation": {
+			"level": 1,
+			"confirm": true,
+			"confirmMessage": "当前页面需要获取你的地理位置，是否同意？"
+		},
+		"mq.net.getNetworkState": 1,
+		"mq.data.getValue": 1,
+		"mq.data.setValue": 1,
+		"mq.view.hideLoading": 2,
+		"mq.view.showLoading": 2,
+		"mq.browser.openUrl": 2
+	},
+	"auths": {
+		"*.qq.com": 1,
+		"qm.qq.com": 0,//所有level大于0的api都能调用
+		"connect.qq.com": 2,
+		"*.imatlas.com": 0
+	}
+}

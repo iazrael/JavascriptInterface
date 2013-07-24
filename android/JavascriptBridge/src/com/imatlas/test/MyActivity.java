@@ -62,6 +62,10 @@ public class MyActivity extends Activity {
 				}
 				return false;
 			}
+
+			@Override
+			public void onCommandNotFound(JavascriptBridge.Command command) {
+			}
 		});
 		webView.loadUrl("http://www.imatlas.com/test.html");
 		btn.setOnClickListener(new View.OnClickListener() {

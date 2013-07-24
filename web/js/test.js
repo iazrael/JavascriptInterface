@@ -1,5 +1,5 @@
 !function(){
-	jsb.addMethod('alert', function(cmd){
+	jsb.registerCommand('alert', function(cmd){
 		alert( '这是java对js的调用------\n' + JSON.stringify(cmd) + '\n========\n');
 		cmd.setResult({"alert callback": "alert success"});
 	});
