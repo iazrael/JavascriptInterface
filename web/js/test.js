@@ -1,4 +1,10 @@
 !function(){
+	jsb.buildCommands([
+		'mq.getVersion',
+		'getXXX',
+		'mq.net.getLocation',
+		'mq.view.showLoading'
+	]);
 	jsb.registerCommand('alert', function(cmd){
 		alert( '这是java对js的调用------\n' + JSON.stringify(cmd) + '\n========\n');
 		cmd.setResult({"alert callback": "alert success"});
