@@ -32,6 +32,7 @@ public class JavascriptBridge {
 	private static final int EXECUTE_JAVA_CALLBACK = 2;
 	private static final int EXECUTE_JAVASCRIPT_FUNCTION = 3;
 	private static final int EXECUTE_JAVASCRIPT_CALLBACK = 4;
+	private static final int EXECUTE_JAVA_FUNCTION_SYNC = 5;
 
 	public static final String PARAM_SERIAL = "serial";
 	public static final String PARAM_NAME = "name";
@@ -49,42 +50,47 @@ public class JavascriptBridge {
 
 	private HashMap<String, Callback> mJavascriptCallbackMap;
 
-	private WebView mWebView;
-
-	private Handler mHandler;
-
 	private OnExecuteCommandListener mOnExecuteCommandListener;
 
+	private WebView mWebView;
+
+	private String mCurrentUrl;
+
+	//使用handler来确保webview相关的接口是在ui线程调用的
+	private Handler mHandler = new Handler(new Handler.Callback() {
+		@Override
+		public boolean handleMessage(Message message) {
+			Command command;
+			switch (message.what) {
+				case EXECUTE_JAVA_FUNCTION:
+					command = (Command) message.obj;
+					executeJavaFunction(command);
+					return true;
+				case EXECUTE_JAVA_CALLBACK:
+					command = (Command) message.obj;
+					executeJavaCallback(command);
+					return true;
+				case EXECUTE_JAVASCRIPT_CALLBACK:
+				case EXECUTE_JAVASCRIPT_FUNCTION:
+					command = (Command) message.obj;
+					executeJavascriptFunction(command);
+					return true;
+			}
+			return false;
+		}
+	});
+
+	/**
+	 * 必须在UI线程中实例化这个类
+	 * @param webView
+	 */
 	public JavascriptBridge(WebView webView) {
-		this.mWebView = webView;
+		mWebView = webView;
 
 		mJavaMethodMap = new HashMap<String, Function>();
 		mJavascriptCallbackMap = new HashMap<String, Callback>();
-		//使用handler来确保webview相关的接口是在ui线程调用的
-		mHandler = new Handler(new Handler.Callback() {
-			@Override
-			public boolean handleMessage(Message message) {
-				Command command;
-				switch (message.what) {
-					case EXECUTE_JAVA_FUNCTION:
-						command = (Command) message.obj;
-						executeJavaFunction(command);
-						return true;
-					case EXECUTE_JAVA_CALLBACK:
-						command = (Command) message.obj;
-						executeJavaCallback(command);
-						return true;
-					case EXECUTE_JAVASCRIPT_CALLBACK:
-					case EXECUTE_JAVASCRIPT_FUNCTION:
-						command = (Command) message.obj;
-						executeJavascriptFunction(command);
-						return true;
-				}
-				return false;
-			}
-		});
 
-		this.mWebView.addJavascriptInterface(new JavascriptInterface(), API_NAMESPACE);
+		mWebView.addJavascriptInterface(new JavascriptInterface(), API_NAMESPACE);
 
 	}
 
@@ -119,17 +125,24 @@ public class JavascriptBridge {
 		if (callback != null) {
 			mJavascriptCallbackMap.put(command.serial, callback);
 		}
-		Message message = mHandler.obtainMessage(EXECUTE_JAVASCRIPT_FUNCTION, command);
-		mHandler.dispatchMessage(message);
+		mHandler.obtainMessage(command.type, command).sendToTarget();
 	}
 
 	/**
-	 * 获取当前webview的页面的域名
+	 * 设置当前webview加载的url, 如果要支持同步API, 必须在Webview的onPageStart事件中设置该值
+	 * @param url
+	 */
+	public void setCurrentUrl(String url) {
+		this.mCurrentUrl = url;
+	}
+
+	/**
+	 * 获取当前webview的页面的域名, 如果有调用 setCurrentUrl, 则优先使用设置的url来处理
 	 *
 	 * @return 当webview未加载页面的时候返回null
 	 */
 	private String getCurrentDomain() {
-		String url = mWebView.getUrl();
+		String url = mCurrentUrl != null ? mCurrentUrl : mWebView.getUrl();
 		if (TextUtils.isEmpty(url)) {
 			return null;
 		}
@@ -150,6 +163,9 @@ public class JavascriptBridge {
 		if (domain == null) {//什么? 当前页面竟然没url!!
 			return;
 		}
+		if (TextUtils.isEmpty(command.name)) {//什么? 命令为空也敢来?
+			return;
+		}
 		if (mOnExecuteCommandListener != null) {
 			boolean shouldExec = mOnExecuteCommandListener.shouldExecuteCommand(domain, command);
 			if (!shouldExec) {
@@ -162,6 +178,7 @@ public class JavascriptBridge {
 		}else if (mOnExecuteCommandListener != null) {
 			mOnExecuteCommandListener.onCommandNotFound(command);
 		}
+		return;
 	}
 
 	/**
@@ -176,7 +193,7 @@ public class JavascriptBridge {
 	/**
 	 * 执行command对应的javascript方法(被java调用)
 	 * @param command
-	 * @throws JSONException
+	 * @throws org.json.JSONException
 	 */
 	private void executeJavascriptFunction(Command command) {
 		String cmdString = command.toString();
@@ -212,7 +229,7 @@ public class JavascriptBridge {
 	public interface Function {
 		/**
 		 * 被js调用是执行的java
-		 *
+		 * 如果该接口是同步接口, 则可以直接返回调用结果
 		 * @param command
 		 */
 		public void onExecute(Command command);
@@ -314,9 +331,11 @@ public class JavascriptBridge {
 		 */
 		public void setResult(JSONObject result) {
 			this.result = result;
+			int type = this.type;
 			this.type = EXECUTE_JAVASCRIPT_CALLBACK;
-			Message message = mHandler.obtainMessage(EXECUTE_JAVASCRIPT_CALLBACK, this);
-			mHandler.dispatchMessage(message);
+			if(type != EXECUTE_JAVA_FUNCTION_SYNC){
+				mHandler.obtainMessage(this.type, this).sendToTarget();
+			}
 		}
 
 	}
@@ -333,26 +352,29 @@ public class JavascriptBridge {
 		 *
 		 * @param cmdString
 		 */
-		public void execute(String cmdString) throws JSONException {
+		public String execute(String cmdString) throws JSONException {
 			JSONObject cmdObj = new JSONObject(cmdString);
 			Command command = new Command(cmdObj);
-			command.type = EXECUTE_JAVA_FUNCTION;
-			Message message = mHandler.obtainMessage(EXECUTE_JAVA_FUNCTION, command);
-			mHandler.dispatchMessage(message);
+			if (command.type == EXECUTE_JAVA_FUNCTION_SYNC) {
+				executeJavaFunction(command);
+				return command.toString();
+			}else{
+				mHandler.obtainMessage(command.type, command).sendToTarget();
+				return null;
+			}
 		}
 
 		/**
 		 * 提供给页面js用来设置java对js的调用结果
 		 *
 		 * @param cmdString
-		 * @throws JSONException
+		 * @throws org.json.JSONException
 		 */
 		public void setResult(String cmdString) throws JSONException {
 			JSONObject cmdObj = new JSONObject(cmdString);
 			Command command = new Command(cmdObj);
 			command.type = EXECUTE_JAVA_CALLBACK;
-			Message message = mHandler.obtainMessage(EXECUTE_JAVA_CALLBACK, command);
-			mHandler.dispatchMessage(message);
+			 mHandler.obtainMessage(command.type, command).sendToTarget();
 		}
 
 

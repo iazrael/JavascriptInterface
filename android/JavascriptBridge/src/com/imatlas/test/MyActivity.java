@@ -2,11 +2,14 @@ package com.imatlas.test;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 import com.imatlas.jsb.JavascriptBridge;
@@ -27,16 +30,48 @@ public class MyActivity extends Activity {
 		Button btn = (Button) findViewById(R.id.button1);
 		Button btn2 = (Button) findViewById(R.id.button2);
 
+		final String initUrl = "http://www.imatlas.com/test.html";
 		final WebView webView = (WebView)findViewById(R.id.webView1);
+		final JavascriptBridge jsb = new JavascriptBridge(webView);
 		webView.setWebChromeClient(new WebChromeClient());
+		webView.setWebViewClient(new WebViewClient(){
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				return super.shouldOverrideUrlLoading(view, url);
+			}
+
+			@Override
+			public void onPageStarted(WebView view, String url, Bitmap favicon) {
+				jsb.setCurrentUrl(url);
+				super.onPageStarted(view, url, favicon);
+			}
+		});
 		WebSettings settings = webView.getSettings();
 		settings.setJavaScriptEnabled(true);
 		settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-		final JavascriptBridge jsb = new JavascriptBridge(webView);
+
+
+
+		jsb.registerCommand("mq.getVersion", new JavascriptBridge.Function() {
+
+			@Override
+			public void onExecute(JavascriptBridge.Command command) {
+
+				try {
+					JSONObject result = new JSONObject();
+					result.put("retcode", 0);
+					result.put("version", "1.0.1");
+					command.setResult(result);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+		});
 
 		//添加个 messagebox 方法给js
-		jsb.registerCommand("messagebox", new JavascriptBridge.Function() {
+		jsb.registerCommand("mq.view.messagebox", new JavascriptBridge.Function() {
 
 			@Override
 			public void onExecute(JavascriptBridge.Command command) {
@@ -67,12 +102,12 @@ public class MyActivity extends Activity {
 			public void onCommandNotFound(JavascriptBridge.Command command) {
 			}
 		});
-		webView.loadUrl("http://www.imatlas.com/test.html");
+		webView.loadUrl(initUrl);
 		btn.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				webView.loadUrl("http://www.imatlas.com/test.html");
+				webView.loadUrl(initUrl);
 			}
 		});
 

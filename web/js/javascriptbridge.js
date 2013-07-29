@@ -13,6 +13,7 @@
 	var EXECUTE_JAVA_CALLBACK = 2;
 	var EXECUTE_JAVASCRIPT_FUNCTION = 3;
 	var EXECUTE_JAVASCRIPT_CALLBACK = 4;
+	var EXECUTE_JAVA_FUNCTION_SYNC = 5;
 
 	var context = global[NAMESPACE] = {};
 	var api = global[API_NAMESPACE] || null;
@@ -58,7 +59,7 @@
 		return function(){
 			var argus = Array.prototype.slice.apply(arguments);
 			argus.unshift(cmdName);
-			context.execute.apply(context, argus);
+			return context.execute.apply(context, argus);
 		}
 	}
 
@@ -98,21 +99,34 @@
 	 * @return {[type]}
 	 */
 	context.execute = function(cmdName, params, callback){
+		var cmd, cmdString;
 		if(arguments.length === 2){
-			callback = params;
-			params = {};
+			if(typeof params === 'function'){
+				callback = params;
+				params = null;
+			}
 		}
-		var cmd = {
+		cmd = {
 			serial: createSerial(),
 			name: cmdName,
-			params: params
-		}
-		if(typeof callback === 'function'){
+			params: params || {}
+		};
+		if(typeof callback === 'function'){//有指定回调, 异步调用
 			mJavaCallbackMap[cmd.serial] = callback;
+			cmd.type = EXECUTE_JAVA_FUNCTION;
+			cmdString = JSON.stringify(cmd);
+            api.execute(cmdString);
+		}else{
+			//同步调用
+			cmd.type = EXECUTE_JAVA_FUNCTION_SYNC;
+			cmdString = JSON.stringify(cmd);
+            cmdString = api.execute(cmdString);
+            cmd = JSON.parse(cmdString);
+            return cmd.result;
 		}
-		var cmdString = JSON.stringify(cmd);
-		api.execute(cmdString);
+
 	}
+
 
 	/**
 	 * 用于批量创建js接口提供给外部的方法
