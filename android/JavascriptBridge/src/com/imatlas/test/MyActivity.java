@@ -69,7 +69,22 @@ public class MyActivity extends Activity {
 			}
 
 		});
+		jsb.registerCommand("mq.device.getBuildVersion", new JavascriptBridge.Function() {
 
+			@Override
+			public void onExecute(JavascriptBridge.Command command) {
+				Bundle result = new Bundle();
+				result.putString("buildVersion", "1.3.1.0");
+				command.setResult(result);
+			}
+		});
+		jsb.registerCommand("mq.device.isMobileQQ", new JavascriptBridge.Function() {
+
+			@Override
+			public void onExecute(JavascriptBridge.Command command) {
+				command.setResult("{'result':true}");
+			}
+		});
 		//添加个 messagebox 方法给js
 		jsb.registerCommand("mq.view.messagebox", new JavascriptBridge.Function() {
 

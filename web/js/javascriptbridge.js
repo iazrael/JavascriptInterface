@@ -131,19 +131,26 @@
 	/**
 	 * 用于批量创建js接口提供给外部的方法
 	 */
-	context.buildCommands = function(cmdNameArr){
-		var name, index, funcName, np;
-		for(var i in cmdNameArr){
-			name = cmdNameArr[i];
+	context.buildCommands = function(arrOrMap){
+		var name, index, funcName, namespace, obj, func;
+		for(var i in arrOrMap){
+			obj = arrOrMap[i];
+			if(typeof obj === 'function'){
+				name = i;
+				func = obj;
+			}else{
+				name = obj;
+				func = createFunction(name);
+			}
 			index = name.lastIndexOf('.');
 			if(index === -1){
-				np = global;
+				namespace = global;
 				funcName = name;
 			}else{
-				np = createNamespace(name.substring(0, index));
+				namespace = createNamespace(name.substring(0, index));
 				funcName = name.substring(index + 1);
 			}
-			np[funcName] = createFunction(name);
+			namespace[funcName] = func;
 		}
 	}
 

@@ -5,12 +5,14 @@
 package com.imatlas.jsb;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.webkit.WebView;
 
 
+import com.imatlas.util.JSONUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -338,6 +340,34 @@ public class JavascriptBridge {
 			}
 		}
 
+
+		/**
+		 * 设置本次java调用的结果
+		 *传入json字符串
+		 * @param jsonString
+		 */
+		public void setResult(String jsonString) {
+			JSONObject json = null;
+			try {
+				json = new JSONObject(jsonString);
+			} catch (JSONException e) {
+			}
+			this.setResult(json);
+		}
+
+		/**
+		 * 设置本次java调用的结果
+		 *传入bundle实例
+		 * @param bundle
+		 */
+		public void setResult(Bundle bundle) {
+			JSONObject json = null;
+			try {
+				json = JSONUtil.bundleToJSON(bundle);
+			} catch (JSONException e) {
+			}
+			this.setResult(json);
+		}
 	}
 
 	/**
