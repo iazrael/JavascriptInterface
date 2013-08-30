@@ -30,7 +30,7 @@ public class MyActivity extends Activity {
 		Button btn = (Button) findViewById(R.id.button1);
 		Button btn2 = (Button) findViewById(R.id.button2);
 
-		final String initUrl = "http://www.imatlas.com/test.html";
+		final String initUrl = "http://appx.imatlas.com/test/test.html";
 		final WebView webView = (WebView)findViewById(R.id.webView1);
 		final JavascriptBridge jsb = new JavascriptBridge(webView);
 		webView.setWebChromeClient(new WebChromeClient());
@@ -107,7 +107,7 @@ public class MyActivity extends Activity {
 		jsb.setOnExecuteCommandListener(new JavascriptBridge.OnExecuteCommandListener() {
 			@Override
 			public boolean shouldExecuteCommand(String domain, JavascriptBridge.Command command) {
-				if(domain.equals("www.imatlas.com")){
+				if(domain.equals("appx.imatlas.com")){
 					return true;
 				}
 				return false;
